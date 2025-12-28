@@ -2,8 +2,12 @@ package com.example.eventsourcingcqrs.commands.controllers;
 
 import com.example.eventsourcingcqrs.commands.commands.AddAccountCommand;
 import com.example.eventsourcingcqrs.commands.commands.CreditAccountCommand;
+import com.example.eventsourcingcqrs.commands.commands.DebitAccountCommand;
+import com.example.eventsourcingcqrs.commands.commands.UpdateAccountStatusCommand;
 import com.example.eventsourcingcqrs.commands.dto.AddNewAccountRequestDTO;
 import com.example.eventsourcingcqrs.commands.dto.CreditAccountRequestDTO;
+import com.example.eventsourcingcqrs.commands.dto.DebitAccountRequestDTO;
+import com.example.eventsourcingcqrs.commands.dto.UpdateAccountStatusRequestDTO;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventsourcing.eventstore.EventStore;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +45,27 @@ public class AccountCommandController {
                 request.currency()
         ));
         return response;
+    }
+
+    @PutMapping(path = "/debit")
+    public CompletableFuture<String> debitAccount(@RequestBody DebitAccountRequestDTO request) {
+        CompletableFuture<String> commandResponse = commandGateway.send(
+                new DebitAccountCommand(
+                        request.accountId(),
+                        request.amount(),
+                        request.currency()
+                ));
+        return commandResponse;
+    }
+
+    @PutMapping(path = "/updateStatus")
+    public CompletableFuture<String> debitAccount(@RequestBody UpdateAccountStatusRequestDTO request) {
+        CompletableFuture<String> commandResponse = commandGateway.send(
+                new UpdateAccountStatusCommand(
+                        request.accountId(),
+                        request.status()
+                ));
+        return commandResponse;
     }
 
     @ExceptionHandler(Exception.class)
