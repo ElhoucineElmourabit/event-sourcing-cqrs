@@ -1,6 +1,6 @@
 package com.example.eventsourcingcqrs.commands.commands;
 
-import com.example.eventsourcingcqrs.AccountStatus;
+import com.example.eventsourcingcqrs.enums.AccountStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;

@@ -1,4 +1,4 @@
-package com.example.eventsourcingcqrs;
+package com.example.eventsourcingcqrs.enums;
 
 public enum AccountStatus {
     CREATED,

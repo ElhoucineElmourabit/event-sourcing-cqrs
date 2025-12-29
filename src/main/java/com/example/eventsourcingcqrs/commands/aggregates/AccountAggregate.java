@@ -1,6 +1,6 @@
 package com.example.eventsourcingcqrs.commands.aggregates;
 
-import com.example.eventsourcingcqrs.AccountStatus;
+import com.example.eventsourcingcqrs.enums.AccountStatus;
 import com.example.eventsourcingcqrs.commands.commands.AddAccountCommand;
 import com.example.eventsourcingcqrs.commands.commands.CreditAccountCommand;
 import com.example.eventsourcingcqrs.commands.commands.DebitAccountCommand;
@@ -8,7 +8,6 @@ import com.example.eventsourcingcqrs.commands.commands.UpdateAccountStatusComman
 import com.example.eventsourcingcqrs.events.*;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.CommandHandler;
-import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.modelling.command.AggregateLifecycle;
@@ -106,7 +105,7 @@ public class AccountAggregate {
     public void handle(UpdateAccountStatusCommand command){
         log.info("############### UpdateAccountStatusCommand Received ####################");
 
-        if(command.getStatus()==status) throw new RuntimeException("This account "+command.getId() + " is is already "command.getStatus());
+        if(command.getStatus()==status) throw new RuntimeException("This account "+command.getId() + " is is already " + command.getStatus());
 
         AggregateLifecycle.apply(new AccountStatusUpdatedEvent(
                 command.getId(),
